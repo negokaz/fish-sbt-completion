@@ -9,7 +9,7 @@ function __fish_construct_completions_for_sbt_new_g8_templates
     mkdir -m 700 -p $XDG_CACHE_HOME/sbt-completions
 
     set --local sbt_g8_templates_cache_file $XDG_CACHE_HOME/sbt-completions/sbt_new_g8_templates
-    set --local temlates_url https://github.com/foundweekends/giter8/wiki/giter8-templates
+    set --local templates_url https://github.com/foundweekends/giter8/wiki/giter8-templates
 
     for template in (find $sbt_g8_templates_cache_file -mtime -1 -exec cat '{}' ';' ^ /dev/null; or curl -s $templates_url | tee $sbt_g8_templates_cache_file)
         # create sbt-new completion contains description
