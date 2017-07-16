@@ -11,8 +11,11 @@ function __fish_construct_completions_for_sbt_new_g8_templates
     set --local sbt_g8_templates_cache_file $XDG_CACHE_HOME/sbt-completions/sbt_new_g8_templates
     set --local templates_url https://github.com/foundweekends/giter8/wiki/giter8-templates
 
-    for template in (find $sbt_g8_templates_cache_file -mtime -1 -exec cat '{}' ';' ^ /dev/null; \
-         or curl -s $templates_url | grep "\.g8<" | sed -E -e 's/<[^>]+>//g' -e 's/\(//g' -e 's/\)//g' | tee $sbt_g8_templates_cache_file)
+    if not find $sbt_g8_templates_cache_file -mtime -1
+        curl -s $templates_url | grep "\.g8<" | sed -E -e 's/<[^>]+>//g' -e 's/\(//g' -e 's/\)//g' > $sbt_g8_templates_cache_file
+    end
+
+    for template in (cat $sbt_g8_templates_cache_file)
         # create sbt-new completion contains description
         set --local template_name   (echo "$template" | awk '{print $1}')
         set --local description     (echo "$template" | awk '{$1 = ""; print $0}')
