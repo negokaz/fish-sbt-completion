@@ -2,6 +2,14 @@
 
 sbt command completion for fish
 
+## Installation
+
+### Use [fisherman](https://github.com/fisherman/fisherman)
+
+```bash
+fisher negokaz/fish-sbt-completion
+```
+
 ## Usage
 
 ### sbt new
