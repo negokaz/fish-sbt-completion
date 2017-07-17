@@ -14,7 +14,7 @@ function __fish_cache_or_print_sbt_new_g8_templates --description 'Print giter8 
     set --local templates_url https://github.com/foundweekends/giter8/wiki/giter8-templates
 
     if not find $sbt_g8_templates_cache_file -mtime -1 ^ /dev/null
-        curl -s $templates_url | grep "\.g8<" | sed -E -e 's/<[^>]+>//g' -e 's/\(//g' -e 's/\)//g' | awk '{ name = $1; $1 = ""; print name, "\t", $0 }' > $sbt_g8_templates_cache_file
+        curl -s $templates_url | grep "\.g8<" | sed -E -e 's/<[^>]+>//g' -e 's/\(//g' -e 's/\)//g' -e 's/^([^ ]+) +/\1'(echo \t)'/' > $sbt_g8_templates_cache_file
     end
 
     cat $sbt_g8_templates_cache_file
